@@ -1,3 +1,3 @@
 # PartitaFrontend
 
-https://jsfiddle.net/Lw6txad8/
+https://jsfiddle.net/bayw21qg/
