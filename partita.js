@@ -83,25 +83,28 @@ function importWithScript(scriptType, scriptPath) {
 }
 
 
-function importJqueryIfAbsent() {
-    if(!window.jQuery) {
-        importWithScript("text/javascript", "https://code.jquery.com/jquery-3.3.1.min.js");
-    }
-}
-
-
-function sleep(seconds) {
-    milliseconds = seconds * 1000;
+function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
 
+async function importJqueryIfAbsent() {
+    if(!window.jQuery) {
+        importWithScript("text/javascript", "https://code.jquery.com/jquery-3.3.1.min.js");
+
+        // Don't return control until jQuery is usable
+        while(!window.jQuery) {
+            await sleep(50);
+        }
+    }
+}
+
+
 async function runPartita() {
-    importJqueryIfAbsent();
-    await sleep(3);
+    // Ensure external dependencies are present. If not, load them before carrying on.
+    await importJqueryIfAbsent();
     $(window).resize(responsiveSize);
     $(document).ready(responsiveSize);
-    console.log('done');
 }
 
 runPartita();
