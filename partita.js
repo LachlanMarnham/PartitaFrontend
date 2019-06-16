@@ -1,3 +1,5 @@
+import * as utils from './utils.js';
+
 const PHI = 1.61803398875;
 
 
@@ -83,18 +85,13 @@ function importWithScript(scriptType, scriptPath) {
 }
 
 
-function sleep(milliseconds) {
-    return new Promise(resolve => setTimeout(resolve, milliseconds));
-}
-
-
 async function importJqueryIfAbsent() {
     if(!window.jQuery) {
         importWithScript("text/javascript", "https://code.jquery.com/jquery-3.3.1.min.js");
 
         // Don't return control until jQuery is usable
         while(!window.jQuery) {
-            await sleep(50);
+            await utils.sleep(50);
         }
     }
 }
@@ -106,5 +103,6 @@ async function runPartita() {
     $(window).resize(responsiveSize);
     $(document).ready(responsiveSize);
 }
+
 
 runPartita();
