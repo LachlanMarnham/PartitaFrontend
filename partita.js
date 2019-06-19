@@ -53,11 +53,13 @@ function responsiveContent() {
     let leftContent = $('#p-content-left');
     for (let cssAttribute of BOTTOM_LEFT_CORNER_CSS_ATTRIBUTES) {
         leftContent.css(cssAttribute, cornerRadius);
+        contentWindow.css(cssAttribute, cornerRadius);
     }
 
     let metronome = $('#p-content-metronome');
     for (let cssAttribute of BOTTOM_RIGHT_CORNER_CSS_ATTRIBUTES) {
         metronome.css(cssAttribute, cornerRadius);
+        contentWindow.css(cssAttribute, cornerRadius);
     }
 }
 
