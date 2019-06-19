@@ -85,6 +85,7 @@ class WorkingView {
 
     renderTree() {
         this.menu = this.renderMenu();
+        console.log(this.button1.text());
         this.anchor.append(this.menu);
 
         this.content = this.renderContent();
@@ -94,7 +95,33 @@ class WorkingView {
     renderMenu() {
         var menu = $('<div>');
         menu.attr('id', 'p-menu');
+        var buttons = [this.button1, this.button2, this.button3] = this.renderMenuButtons();
+        menu.append(buttons);
         return menu;
+    }
+
+    renderMenuButtons() {
+        var button1 = $('<button>');
+        button1.attr('id', 'p-menuButton-1');
+        button1.text('Button 1');
+
+        var button2 = $('<button>');
+        button2.attr('id', 'p-menuButton-2');
+        button2.text('Button 2');
+
+        var button3 = $('<button>');
+        button3.attr('id', 'p-menuButton-3');
+        button3.text('Button 3');
+
+        var buttons = [button1, button2, button3];
+        var buttonWidth = String(100 / buttons.length) + '%';
+
+        for (let button of buttons) {
+            button.width(buttonWidth);
+            button.height('100%');
+        }
+        return buttons;
+
     }
 
     renderContent() {

@@ -1,7 +1,31 @@
 #p-menu {
   width: 100%;
   max-width: 1000px;
+}
+
+#p-menu button {
   background-color: #56494C; /* TODO #847E89 when item selected */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+}
+
+#p-menu button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+#p-menu:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+#p-menu button:hover {
+  background-color: #3e8e41;
 }
 
 #p-content {
