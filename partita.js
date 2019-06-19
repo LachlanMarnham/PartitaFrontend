@@ -52,8 +52,17 @@ function responsiveContent() {
 
     let leftContent = $('#p-content-left');
     for (let cssAttribute of BOTTOM_LEFT_CORNER_CSS_ATTRIBUTES) {
-        leftContent.css(cssAttribute, cornerRadius);
+        // The contentWindow is a wrapper which isn't visible, but
+        // it has a visible boarder so that needs to be curved
         contentWindow.css(cssAttribute, cornerRadius);
+
+        // We have scales, repertoire etc as different layers in the
+        // leftContent window. To view them we simply change their
+        // z-indices. This means we have to curve their respective corners
+        // separately to get the right effect
+        for (let contentViewLayer of leftContent.children()) {
+            $(contentViewLayer).css(cssAttribute, cornerRadius);
+        }
     }
 
     let metronome = $('#p-content-metronome');
