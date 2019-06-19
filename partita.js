@@ -106,7 +106,6 @@ class WorkingView {
 
     renderTree() {
         this.menu = this.renderMenu();
-        console.log(this.button1.text());
         this.anchor.append(this.menu);
 
         this.content = this.renderContent();
@@ -114,28 +113,32 @@ class WorkingView {
     }
 
     renderMenu() {
-        var menu = $('<div>');
+        let menu = $('<div>');
         menu.attr('id', 'p-menu');
-        var buttons = [this.button1, this.button2, this.button3] = this.renderMenuButtons();
+        let buttons = [
+            this.scalesButton,
+            this.repertoireButton,
+            this.focusedPracticeButton,
+        ] = this.renderMenuButtons();
         menu.append(buttons);
         return menu;
     }
 
     renderMenuButtons() {
-        var button1 = $('<button>');
-        button1.attr('id', 'p-menuButton-1');
-        button1.text('Button 1');
+        let scalesButton = $('<button>');
+        scalesButton.attr('id', 'p-menuScalesButton');
+        scalesButton.text('Scales');
 
-        var button2 = $('<button>');
-        button2.attr('id', 'p-menuButton-2');
-        button2.text('Button 2');
+        let repertoireButton = $('<button>');
+        repertoireButton.attr('id', 'p-menuRepertoireButton');
+        repertoireButton.text('Repertoire');
 
-        var button3 = $('<button>');
-        button3.attr('id', 'p-menuButton-3');
-        button3.text('Button 3');
+        let focusedPracticeButton = $('<button>');
+        focusedPracticeButton.attr('id', 'p-menuFocusedPracticeButton');
+        focusedPracticeButton.text('Focused Practice');
 
-        var buttons = [button1, button2, button3];
-        var buttonWidth = String(100 / buttons.length) + '%';
+        let buttons = [scalesButton, repertoireButton, focusedPracticeButton];
+        const buttonWidth = String(100 / buttons.length) + '%';
 
         for (let button of buttons) {
             button.width(buttonWidth);
