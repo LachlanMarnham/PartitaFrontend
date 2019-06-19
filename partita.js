@@ -52,8 +52,17 @@ function responsiveContent() {
 
     let leftContent = $('#p-content-left');
     for (let cssAttribute of BOTTOM_LEFT_CORNER_CSS_ATTRIBUTES) {
-        leftContent.css(cssAttribute, cornerRadius);
+        // The contentWindow is a wrapper which isn't visible, but
+        // it has a visible boarder so that needs to be curved
         contentWindow.css(cssAttribute, cornerRadius);
+
+        // We have scales, repertoire etc as different layers in the
+        // leftContent window. To view them we simply change their
+        // z-indices. This means we have to curve their respective corners
+        // separately to get the right effect
+        for (let contentViewLayer of leftContent.children()) {
+            $(contentViewLayer).css(cssAttribute, cornerRadius);
+        }
     }
 
     let metronome = $('#p-content-metronome');
@@ -98,6 +107,27 @@ function responsiveSize() {
 }
 
 
+function showNewLayer(newLayerId) {
+    let newLayer = $('#' + newLayerId);
+    let oldLayer = $('.renderedLayer');
+    oldLayer.removeClass('renderedLayer');
+    newLayer.addClass('renderedLayer');
+}
+
+
+function showScales() {
+    showNewLayer('p-content-scales');
+}
+
+function showRepertoire() {
+    showNewLayer('p-content-repertoire');
+}
+
+function showFocusedPractice() {
+    showNewLayer('p-content-focused-practice');
+}
+
+
 class WorkingView {
     constructor(anchorId) {
         this.anchor = $('#' + anchorId);
@@ -106,7 +136,6 @@ class WorkingView {
 
     renderTree() {
         this.menu = this.renderMenu();
-        console.log(this.button1.text());
         this.anchor.append(this.menu);
 
         this.content = this.renderContent();
@@ -114,28 +143,36 @@ class WorkingView {
     }
 
     renderMenu() {
-        var menu = $('<div>');
+        let menu = $('<div>');
         menu.attr('id', 'p-menu');
-        var buttons = [this.button1, this.button2, this.button3] = this.renderMenuButtons();
+        let buttons = [
+            this.scalesButton,
+            this.repertoireButton,
+            this.focusedPracticeButton,
+        ] = this.renderMenuButtons();
         menu.append(buttons);
+
+        this.scalesButton.click(showScales);
+        this.repertoireButton.click(showRepertoire);
+        this.focusedPracticeButton.click(showFocusedPractice);
         return menu;
     }
 
     renderMenuButtons() {
-        var button1 = $('<button>');
-        button1.attr('id', 'p-menuButton-1');
-        button1.text('Button 1');
+        let scalesButton = $('<button>');
+        scalesButton.attr('id', 'p-menuScalesButton');
+        scalesButton.text('Scales');
 
-        var button2 = $('<button>');
-        button2.attr('id', 'p-menuButton-2');
-        button2.text('Button 2');
+        let repertoireButton = $('<button>');
+        repertoireButton.attr('id', 'p-menuRepertoireButton');
+        repertoireButton.text('Repertoire');
 
-        var button3 = $('<button>');
-        button3.attr('id', 'p-menuButton-3');
-        button3.text('Button 3');
+        let focusedPracticeButton = $('<button>');
+        focusedPracticeButton.attr('id', 'p-menuFocusedPracticeButton');
+        focusedPracticeButton.text('Focused Practice');
 
-        var buttons = [button1, button2, button3];
-        var buttonWidth = String(100 / buttons.length) + '%';
+        let buttons = [scalesButton, repertoireButton, focusedPracticeButton];
+        const buttonWidth = String(100 / buttons.length) + '%';
 
         for (let button of buttons) {
             button.width(buttonWidth);
@@ -158,9 +195,44 @@ class WorkingView {
     }
 
     renderContentLeft() {
-        var contentLeft = $('<span>');
+        let contentLeft = $('<span>');
         contentLeft.attr('id', 'p-content-left');
+
+        this.contentScales = this.renderScales();
+        contentLeft.append(this.contentScales);
+
+        this.contentRepertoire = this.renderRepertoire();
+        contentLeft.append(this.contentRepertoire);
+
+        this.contentFocusedPractice = this.renderFocusedPractice();
+        contentLeft.append(this.contentFocusedPractice);
+
         return contentLeft;
+    }
+
+    renderScales() {
+        let contentScales = $('<div>');
+        contentScales.attr('id', 'p-content-scales');
+        contentScales.addClass('renderedLayer');
+        let scalesText = $('<p>SCALES!</p>');
+        contentScales.append(scalesText);
+        return contentScales;
+    }
+
+    renderRepertoire() {
+        let contentRepertoire = $('<div>');
+        contentRepertoire.attr('id', 'p-content-repertoire');
+        let repertoireText = $('<p>REPERTOIRE!</p>');
+        contentRepertoire.append(repertoireText);
+        return contentRepertoire;
+    }
+
+    renderFocusedPractice() {
+        let contentFocusedPractice = $('<div>');
+        contentFocusedPractice.attr('id', 'p-content-focused-practice');
+        let FocusedPracticeText = $('<p>FOCUSED PRACTICE!</p>');
+        contentFocusedPractice.append(FocusedPracticeText);
+        return contentFocusedPractice;
     }
 
     renderContentRight() {
@@ -187,8 +259,6 @@ class WorkingView {
         metronome.attr('id', 'p-content-metronome');
         return metronome
     }
-
-
 }
 
 
@@ -203,4 +273,3 @@ async function runPartita(anchorId) {
 }
 
 runPartita('partita');
-
