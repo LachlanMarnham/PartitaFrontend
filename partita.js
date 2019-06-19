@@ -98,15 +98,14 @@ class WorkingView {
     }
 
     renderContent() {
-        this.content = $('<div>');
-        this.content.attr('id', 'p-content');
+        var content = $('<div>');
+        content.attr('id', 'p-content');
 
         this.contentLeft = this.renderContentLeft();
-        this.content.append(this.contentLeft);
+        content.append(this.contentLeft);
 
         this.contentRight = this.renderContentRight();
-        this.content.append(this.contentRight);
-        this.anchor.append(content);
+        content.append(this.contentRight);
         return content;
     }
 
@@ -119,7 +118,26 @@ class WorkingView {
     renderContentRight() {
         var contentRight = $('<span>');
         contentRight.attr('id', 'p-content-right');
+
+        this.tuner = this.renderTuner();
+        contentRight.append(this.tuner);
+
+        this.metronome = this.renderMetronome();
+        contentRight.append(this.metronome);
+
         return contentRight;
+    }
+
+    renderTuner() {
+        var tuner = $('<div>');
+        tuner.attr('id', 'p-content-tuner');
+        return tuner;
+    }
+
+    renderMetronome() {
+        var metronome = $('<div>');
+        metronome.attr('id', 'p-content-metronome');
+        return metronome
     }
 
 
