@@ -6,16 +6,23 @@ const PHI = 1.61803398875;
 const CORNER_RADIUS_WIDTH_RATIO = 0.015;
 
 
-const TOP_CORNER_CSS_ATTRIBUTES = [
-		"-moz-border-top-right-radius",
-        "-webkit-border-top-right-radius",
-        "-khtml-border-top-right-radius",
-        "border-top-right-radius",
+const TOP_LEFT_CORNER_CSS_ATTRIBUTES = [
         "-moz-border-top-left-radius",
         "-webkit-border-top-left-radius",
         "-khtml-border-top-left-radius",
         "border-top-left-radius",
 ];
+
+
+const TOP_RIGHT_CORNER_CSS_ATTRIBUTES = [
+		"-moz-border-top-right-radius",
+        "-webkit-border-top-right-radius",
+        "-khtml-border-top-right-radius",
+        "border-top-right-radius",
+];
+
+
+const TOP_CORNER_CSS_ATTRIBUTES = TOP_LEFT_CORNER_CSS_ATTRIBUTES.concat(TOP_RIGHT_CORNER_CSS_ATTRIBUTES);
 
 
 const BOTTOM_RIGHT_CORNER_CSS_ATTRIBUTES = [
@@ -67,6 +74,18 @@ function responsiveMenu() {
     let cornerRadius = menuWidth * CORNER_RADIUS_WIDTH_RATIO;
     for (let cssAttribute of TOP_CORNER_CSS_ATTRIBUTES) {
         menu.css(cssAttribute, cornerRadius);
+    }
+
+    let buttons = menu.children();
+    let leftButton = $(buttons[0]);
+    let rightButton = $(buttons[buttons.length - 1]);
+
+    for (let cssAttribute of TOP_LEFT_CORNER_CSS_ATTRIBUTES) {
+        leftButton.css(cssAttribute, cornerRadius);
+    }
+
+    for (let cssAttribute of TOP_RIGHT_CORNER_CSS_ATTRIBUTES) {
+        rightButton.css(cssAttribute, cornerRadius);
     }
 }
 
