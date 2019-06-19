@@ -6,16 +6,23 @@ const PHI = 1.61803398875;
 const CORNER_RADIUS_WIDTH_RATIO = 0.015;
 
 
-const TOP_CORNER_CSS_ATTRIBUTES = [
-		"-moz-border-top-right-radius",
-        "-webkit-border-top-right-radius",
-        "-khtml-border-top-right-radius",
-        "border-top-right-radius",
+const TOP_LEFT_CORNER_CSS_ATTRIBUTES = [
         "-moz-border-top-left-radius",
         "-webkit-border-top-left-radius",
         "-khtml-border-top-left-radius",
         "border-top-left-radius",
 ];
+
+
+const TOP_RIGHT_CORNER_CSS_ATTRIBUTES = [
+		"-moz-border-top-right-radius",
+        "-webkit-border-top-right-radius",
+        "-khtml-border-top-right-radius",
+        "border-top-right-radius",
+];
+
+
+const TOP_CORNER_CSS_ATTRIBUTES = TOP_LEFT_CORNER_CSS_ATTRIBUTES.concat(TOP_RIGHT_CORNER_CSS_ATTRIBUTES);
 
 
 const BOTTOM_RIGHT_CORNER_CSS_ATTRIBUTES = [
@@ -46,11 +53,13 @@ function responsiveContent() {
     let leftContent = $('#p-content-left');
     for (let cssAttribute of BOTTOM_LEFT_CORNER_CSS_ATTRIBUTES) {
         leftContent.css(cssAttribute, cornerRadius);
+        contentWindow.css(cssAttribute, cornerRadius);
     }
 
     let metronome = $('#p-content-metronome');
     for (let cssAttribute of BOTTOM_RIGHT_CORNER_CSS_ATTRIBUTES) {
         metronome.css(cssAttribute, cornerRadius);
+        contentWindow.css(cssAttribute, cornerRadius);
     }
 }
 
@@ -68,6 +77,18 @@ function responsiveMenu() {
     for (let cssAttribute of TOP_CORNER_CSS_ATTRIBUTES) {
         menu.css(cssAttribute, cornerRadius);
     }
+
+    let buttons = menu.children();
+    let leftButton = $(buttons[0]);
+    let rightButton = $(buttons[buttons.length - 1]);
+
+    for (let cssAttribute of TOP_LEFT_CORNER_CSS_ATTRIBUTES) {
+        leftButton.css(cssAttribute, cornerRadius);
+    }
+
+    for (let cssAttribute of TOP_RIGHT_CORNER_CSS_ATTRIBUTES) {
+        rightButton.css(cssAttribute, cornerRadius);
+    }
 }
 
 
@@ -77,12 +98,109 @@ function responsiveSize() {
 }
 
 
-async function runPartita() {
-    // Ensure external dependencies are present. If not, load them before carrying on.
-    await utils.importJqueryIfAbsent();
-    $(window).resize(responsiveSize);
-    $(document).ready(responsiveSize);
+class WorkingView {
+    constructor(anchorId) {
+        this.anchor = $('#' + anchorId);
+        this.renderTree();
+    }
+
+    renderTree() {
+        this.menu = this.renderMenu();
+        console.log(this.button1.text());
+        this.anchor.append(this.menu);
+
+        this.content = this.renderContent();
+        this.anchor.append(this.content);
+    }
+
+    renderMenu() {
+        var menu = $('<div>');
+        menu.attr('id', 'p-menu');
+        var buttons = [this.button1, this.button2, this.button3] = this.renderMenuButtons();
+        menu.append(buttons);
+        return menu;
+    }
+
+    renderMenuButtons() {
+        var button1 = $('<button>');
+        button1.attr('id', 'p-menuButton-1');
+        button1.text('Button 1');
+
+        var button2 = $('<button>');
+        button2.attr('id', 'p-menuButton-2');
+        button2.text('Button 2');
+
+        var button3 = $('<button>');
+        button3.attr('id', 'p-menuButton-3');
+        button3.text('Button 3');
+
+        var buttons = [button1, button2, button3];
+        var buttonWidth = String(100 / buttons.length) + '%';
+
+        for (let button of buttons) {
+            button.width(buttonWidth);
+            button.height('100%');
+        }
+        return buttons;
+
+    }
+
+    renderContent() {
+        var content = $('<div>');
+        content.attr('id', 'p-content');
+
+        this.contentLeft = this.renderContentLeft();
+        content.append(this.contentLeft);
+
+        this.contentRight = this.renderContentRight();
+        content.append(this.contentRight);
+        return content;
+    }
+
+    renderContentLeft() {
+        var contentLeft = $('<span>');
+        contentLeft.attr('id', 'p-content-left');
+        return contentLeft;
+    }
+
+    renderContentRight() {
+        var contentRight = $('<span>');
+        contentRight.attr('id', 'p-content-right');
+
+        this.tuner = this.renderTuner();
+        contentRight.append(this.tuner);
+
+        this.metronome = this.renderMetronome();
+        contentRight.append(this.metronome);
+
+        return contentRight;
+    }
+
+    renderTuner() {
+        var tuner = $('<div>');
+        tuner.attr('id', 'p-content-tuner');
+        return tuner;
+    }
+
+    renderMetronome() {
+        var metronome = $('<div>');
+        metronome.attr('id', 'p-content-metronome');
+        return metronome
+    }
+
+
 }
 
 
-runPartita();
+async function runPartita(anchorId) {
+    // Ensure external dependencies are present. If not, load them before carrying on.
+    await utils.importJqueryIfAbsent();
+
+    var workingView = new WorkingView(anchorId);
+    $(window).resize(responsiveSize);
+    $(document).ready(responsiveSize);
+
+}
+
+runPartita('partita');
+
