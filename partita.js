@@ -98,6 +98,27 @@ function responsiveSize() {
 }
 
 
+function showNewLayer(newLayerId) {
+    let newLayer = $('#' + newLayerId);
+    let oldLayer = $('.renderedLayer');
+    oldLayer.removeClass('renderedLayer');
+    newLayer.addClass('renderedLayer');
+}
+
+
+function showScales() {
+    showNewLayer('p-content-scales');
+}
+
+function showRepertoire() {
+    showNewLayer('p-content-repertoire');
+}
+
+function showFocusedPractice() {
+    showNewLayer('p-content-focused-practice');
+}
+
+
 class WorkingView {
     constructor(anchorId) {
         this.anchor = $('#' + anchorId);
@@ -121,6 +142,10 @@ class WorkingView {
             this.focusedPracticeButton,
         ] = this.renderMenuButtons();
         menu.append(buttons);
+
+        this.scalesButton.click(showScales);
+        this.repertoireButton.click(showRepertoire);
+        this.focusedPracticeButton.click(showFocusedPractice);
         return menu;
     }
 
@@ -161,9 +186,44 @@ class WorkingView {
     }
 
     renderContentLeft() {
-        var contentLeft = $('<span>');
+        let contentLeft = $('<span>');
         contentLeft.attr('id', 'p-content-left');
+
+        this.contentScales = this.renderScales();
+        contentLeft.append(this.contentScales);
+
+        this.contentRepertoire = this.renderRepertoire();
+        contentLeft.append(this.contentRepertoire);
+
+        this.contentFocusedPractice = this.renderFocusedPractice();
+        contentLeft.append(this.contentFocusedPractice);
+
         return contentLeft;
+    }
+
+    renderScales() {
+        let contentScales = $('<div>');
+        contentScales.attr('id', 'p-content-scales');
+        contentScales.addClass('renderedLayer');
+        let scalesText = $('<p>SCALES!</p>');
+        contentScales.append(scalesText);
+        return contentScales;
+    }
+
+    renderRepertoire() {
+        let contentRepertoire = $('<div>');
+        contentRepertoire.attr('id', 'p-content-repertoire');
+        let repertoireText = $('<p>REPERTOIRE!</p>');
+        contentRepertoire.append(repertoireText);
+        return contentRepertoire;
+    }
+
+    renderFocusedPractice() {
+        let contentFocusedPractice = $('<div>');
+        contentFocusedPractice.attr('id', 'p-content-focused-practice');
+        let FocusedPracticeText = $('<p>FOCUSED PRACTICE!</p>');
+        contentFocusedPractice.append(FocusedPracticeText);
+        return contentFocusedPractice;
     }
 
     renderContentRight() {
@@ -190,8 +250,6 @@ class WorkingView {
         metronome.attr('id', 'p-content-metronome');
         return metronome
     }
-
-
 }
 
 
@@ -206,4 +264,3 @@ async function runPartita(anchorId) {
 }
 
 runPartita('partita');
-
