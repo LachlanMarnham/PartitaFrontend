@@ -77,12 +77,64 @@ function responsiveSize() {
 }
 
 
-async function runPartita() {
-    // Ensure external dependencies are present. If not, load them before carrying on.
-    await utils.importJqueryIfAbsent();
-    $(window).resize(responsiveSize);
-    $(document).ready(responsiveSize);
+class WorkingView {
+    constructor(anchorId) {
+        this.anchor = $('#' + anchorId);
+        this.renderTree();
+    }
+
+    renderTree() {
+        this.menu = this.renderMenu();
+        this.anchor.append(this.menu);
+
+        this.content = this.renderContent();
+        this.anchor.append(this.content);
+    }
+
+    renderMenu() {
+        var menu = $('<div>');
+        menu.attr('id', 'p-menu');
+        return menu;
+    }
+
+    renderContent() {
+        this.content = $('<div>');
+        this.content.attr('id', 'p-content');
+
+        this.contentLeft = this.renderContentLeft();
+        this.content.append(this.contentLeft);
+
+        this.contentRight = this.renderContentRight();
+        this.content.append(this.contentRight);
+        this.anchor.append(content);
+        return content;
+    }
+
+    renderContentLeft() {
+        var contentLeft = $('<span>');
+        contentLeft.attr('id', 'p-content-left');
+        return contentLeft;
+    }
+
+    renderContentRight() {
+        var contentRight = $('<span>');
+        contentRight.attr('id', 'p-content-right');
+        return contentRight;
+    }
+
+
 }
 
 
-runPartita();
+async function runPartita(anchorId) {
+    // Ensure external dependencies are present. If not, load them before carrying on.
+    await utils.importJqueryIfAbsent();
+
+    var workingView = new WorkingView(anchorId);
+    $(window).resize(responsiveSize);
+    $(document).ready(responsiveSize);
+
+}
+
+runPartita('partita');
+
