@@ -6,11 +6,11 @@
 #p-menu button {
   background-color: #56494C; /* TODO #847E89 when item selected */
   border: 1px solid #42373a;
-  color: white; /* White text */
-  padding: 10px 24px; /* Some padding */
+  color: white;
+  padding: 10px 24px;
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
 }
 
