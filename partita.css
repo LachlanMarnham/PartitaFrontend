@@ -56,9 +56,10 @@
   width: 50%;
   float: left;
   height: 100%;
+  max-height: 100% !important;
   background-color: #C2D3CD;
   border-right: var(--global-border-style);
-  position: absolute;
+  position: relative;
 }
 
 #p-content-right {
