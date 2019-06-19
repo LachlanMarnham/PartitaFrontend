@@ -1,0 +1,16 @@
+FROM python:3.7.3-slim
+
+ENV PROJECT_LOCATION /src
+ENV CONTAINER_APP_PORT 5678
+
+WORKDIR $PROJECT_LOCATION
+
+# Install project requirements
+RUN pip install --no-cache-dir --upgrade pip
+COPY ./requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Run the server
+EXPOSE $CONTAINER_APP_PORT
+COPY ./app.py app.py
+CMD ["python", "app.py"]
