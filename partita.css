@@ -4,7 +4,7 @@
 }
 
 #p-menu button {
-  background-color: #56494C; /* TODO #847E89 when item selected */
+  background-color: #56494C;
   border: 1px solid #42373a;
   color: white;
   padding: 10px 24px;
@@ -31,7 +31,7 @@
 }
 
 #p-menu button:focus {
-  background-color: red;
+  background-color: #847E89;
   outline: none;
 }
 
