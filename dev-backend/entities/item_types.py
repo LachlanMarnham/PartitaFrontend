@@ -4,8 +4,8 @@ from typing import Optional
 
 from sortedcontainers import SortedSet
 
-from backend.enums import ItemTypes
-from backend.helpers import get_highest_reasonable_time_from_timedelta, str_to_datetime
+from utils.enums import ItemTypes
+from utils.helpers import get_highest_reasonable_time_from_timedelta, str_to_datetime
 
 
 class BaseMusicalItem(metaclass=ABCMeta):
