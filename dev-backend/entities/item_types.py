@@ -1,5 +1,5 @@
 from abc import ABCMeta
-from typing import Optional
+from typing import Dict, Optional
 
 import pendulum
 from sortedcontainers import SortedSet
@@ -56,7 +56,7 @@ class Piece(BaseMusicalItem):
         super().__init__(iid, title, sort_index, last_played, played_since_shuffle, created)
 
     @property
-    def _dormancy(self) -> Optional[pendulum.period.Period]:
+    def _dormancy(self):
         if self.last_played:
             return pendulum.now('UTC') - self.last_played
 
@@ -102,3 +102,13 @@ class Scale(BaseMusicalItem):
     def add_tempo(self, tempo: int) -> None:
         """ Add a new tempo to the set (it will be automatically re-sorted) """
         self.tempos.add(tempo)
+
+    def to_dict(self) -> dict:
+        return {
+            'item_type': self.item_type.value,
+            'iid': self.iid,
+            'title': self.title,
+            'sort_index': self.sort_index,
+            'tempos': list(self.tempos),
+            'last_played': self.last_played if self.last_played is None else self.last_played.to_iso8601_string()
+        }
