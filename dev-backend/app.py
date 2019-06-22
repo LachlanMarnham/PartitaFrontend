@@ -1,7 +1,8 @@
+import json
 import logging
 
 from flask import Flask
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO
 
 from entities.item_types import Scale
 
@@ -13,17 +14,16 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
-# @socketio.on('message 1')
-# def hello():
-#     response = {}
-#
-#     a_minor = Scale(iid=1, title="A Minor", sort_index=0)
-#     b_major = Scale(iid=2, title="B Major", sort_index=1)
-#     c_diminished = Scale(iid=3, title="C Diminished", sort_index=2)
-#
-#     response['scales'] = [a_minor.to_dict(), b_major.to_dict(), c_diminished.to_dict()]
-#     return json.dumps(response), 200
-#
+@socketio.on('fetch data')
+def fetch_data():
+    response = {}
+
+    a_minor = Scale(iid=1, title="A Minor", sort_index=0)
+    b_major = Scale(iid=2, title="B Major", sort_index=1)
+    c_diminished = Scale(iid=3, title="C Diminished", sort_index=2)
+
+    response['scales'] = [a_minor.to_dict(), b_major.to_dict(), c_diminished.to_dict()]
+    return json.dumps(response)
 
 
 @socketio.on('connect')
