@@ -23,7 +23,7 @@ class BaseMusicalItem(metaclass=ABCMeta):
         self.iid = iid
         self.title = title
         self.sort_index = sort_index
-        self.last_played = str_to_datetime(last_played)  # TODO: this is the wrong function...resolution too low
+        self.last_played = None if last_played is None else str_to_datetime(last_played)  # TODO: this is the wrong function...resolution too low
         self.played_since_shuffle = played_since_shuffle
         self.created = datetime.now() if created is None else str_to_datetime(created)
 
