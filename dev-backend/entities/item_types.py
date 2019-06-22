@@ -1,7 +1,7 @@
 from abc import ABCMeta
-from datetime import datetime, timedelta
 from typing import Optional
 
+import pendulum
 from sortedcontainers import SortedSet
 
 from utils.enums import ItemTypes
@@ -25,7 +25,7 @@ class BaseMusicalItem(metaclass=ABCMeta):
         self.sort_index = sort_index
         self.last_played = None if last_played is None else str_to_datetime(last_played)  # TODO: this is the wrong function...resolution too low
         self.played_since_shuffle = played_since_shuffle
-        self.created = datetime.now() if created is None else str_to_datetime(created)
+        self.created = pendulum.now('UTC') if created is None else pendulum.parse(created)
 
     def set_sort_index(self, new_index: int) -> None:
         """
@@ -56,9 +56,9 @@ class Piece(BaseMusicalItem):
         super().__init__(iid, title, sort_index, last_played, played_since_shuffle, created)
 
     @property
-    def _dormancy(self) -> Optional[timedelta]:
+    def _dormancy(self) -> Optional[pendulum.period.Period]:
         if self.last_played:
-            return datetime.now() - self.last_played
+            return pendulum.now('UTC') - self.last_played
 
     @property
     def dormancy_string(self) -> str:
