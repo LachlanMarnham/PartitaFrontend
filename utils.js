@@ -45,6 +45,15 @@ class DOMHandler {
         return $('<button>');
     }
 
+    makeMenuButton(id, text, width, height) {
+        let newButton = this.makeNewButton();
+        newButton.attr('id', id);
+        newButton.text(text);
+        newButton.width(width);
+        newButton.height(height);
+        return newButton;
+    }
+
 }
 
 

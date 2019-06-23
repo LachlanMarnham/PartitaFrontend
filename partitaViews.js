@@ -55,26 +55,31 @@ class WorkingView {
     }
 
     renderMenuButtons() {
-        let scalesButton = this.domHandler.makeNewButton();
-        scalesButton.attr('id', 'p-menuScalesButton');
-        scalesButton.text('Scales');
+        const numberOfButtons = 3;
+        const buttonWidth = String(100 / numberOfButtons) + '%';
 
-        let repertoireButton = this.domHandler.makeNewButton();
-        repertoireButton.attr('id', 'p-menuRepertoireButton');
-        repertoireButton.text('Repertoire');
+        let scalesButton = this.domHandler.makeMenuButton(
+            'p-menuScalesButton',
+            'Scales',
+            buttonWidth,
+            '100%',
+        );
 
-        let focusedPracticeButton = this.domHandler.makeNewButton();
-        focusedPracticeButton.attr('id', 'p-menuFocusedPracticeButton');
-        focusedPracticeButton.text('Focused Practice');
+        let repertoireButton = this.domHandler.makeMenuButton(
+            'p-menuRepertoireButton',
+            'Repertoire',
+            buttonWidth,
+            '100%',
+        );
 
-        let buttons = [scalesButton, repertoireButton, focusedPracticeButton];
-        const buttonWidth = String(100 / buttons.length) + '%';
+        let focusedPracticeButton = this.domHandler.makeMenuButton(
+            'p-menuFocusedPracticeButton',
+            'Focused Practice!',
+            buttonWidth,
+            '100%',
+        );
 
-        for (let button of buttons) {
-            button.width(buttonWidth);
-            button.height('100%');
-        }
-        return buttons;
+        return [scalesButton, repertoireButton, focusedPracticeButton];
 
     }
 
