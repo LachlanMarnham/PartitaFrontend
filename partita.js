@@ -41,11 +41,24 @@ const BOTTOM_LEFT_CORNER_CSS_ATTRIBUTES = [
 ];
 
 
+const BOTTOM_CORNER_CSS_ATTRIBUTES = BOTTOM_LEFT_CORNER_CSS_ATTRIBUTES.concat(BOTTOM_RIGHT_CORNER_CSS_ATTRIBUTES);
+
+
+const CORNER_CSS_ATTRIBUTES = TOP_CORNER_CSS_ATTRIBUTES.concat(BOTTOM_CORNER_CSS_ATTRIBUTES);
+
+
 function responsiveWrapper() {
     let partitaWrapper = $('#partita');
     let width = partitaWrapper.width();
     partitaWrapper.height(width / PHI);
+
+    let cornerRadius = width * CORNER_RADIUS_WIDTH_RATIO;
+
+    for (let cssAttribute of CORNER_CSS_ATTRIBUTES) {
+        partitaWrapper.css(cssAttribute, cornerRadius);
+    }
 }
+
 
 function responsiveContent() {
     // set content height
