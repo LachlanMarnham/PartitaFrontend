@@ -1,3 +1,14 @@
+import {DOMHandler} from './utils.js'
+
+
+function showNewLayer(newLayerId) {
+    let newLayer = $('#' + newLayerId);
+    let oldLayer = $('.renderedLayer');
+    oldLayer.removeClass('renderedLayer');
+    newLayer.addClass('renderedLayer');
+}
+
+
 function showScales() {
     showNewLayer('p-content-scales');
 }
@@ -14,8 +25,9 @@ function showFocusedPractice() {
 
 
 class WorkingView {
-    constructor(anchor) {
+    constructor(anchor, domHandler) {
         this.anchor = anchor;
+        this.domHandler = domHandler;
     }
 
     render() {
@@ -27,7 +39,7 @@ class WorkingView {
     }
 
     renderMenu() {
-        let menu = $('<div>');
+        let menu = this.domHandler.makeNewDiv();
         menu.attr('id', 'p-menu');
         let buttons = [
             this.scalesButton,
@@ -43,15 +55,15 @@ class WorkingView {
     }
 
     renderMenuButtons() {
-        let scalesButton = $('<button>');
+        let scalesButton = this.domHandler.makeNewButton();
         scalesButton.attr('id', 'p-menuScalesButton');
         scalesButton.text('Scales');
 
-        let repertoireButton = $('<button>');
+        let repertoireButton = this.domHandler.makeNewButton();
         repertoireButton.attr('id', 'p-menuRepertoireButton');
         repertoireButton.text('Repertoire');
 
-        let focusedPracticeButton = $('<button>');
+        let focusedPracticeButton = this.domHandler.makeNewButton();
         focusedPracticeButton.attr('id', 'p-menuFocusedPracticeButton');
         focusedPracticeButton.text('Focused Practice');
 
@@ -149,8 +161,9 @@ class WorkingView {
 class Views {
     constructor(anchorId) {
         this.currentView = null;
-        this.anchor = $('#' + anchorId);
-        this.workingView = new WorkingView(this.anchor);
+        this.domHandler = new DOMHandler();
+        this.anchor = this.domHandler.getById(anchorId); //$('#' + anchorId);
+        this.workingView = new WorkingView(this.anchor, this.domHandler);
     }
 
     renderWorkingView() {

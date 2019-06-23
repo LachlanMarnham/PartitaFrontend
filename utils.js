@@ -22,4 +22,30 @@ async function importJqueryIfAbsent() {
     }
 }
 
-export {importJqueryIfAbsent};
+
+class DOMHandler {
+    constructor() {
+        this.window = $(window);
+        this.document = $(document);
+    }
+
+    getById(id) {
+        return $('#' + id);
+    }
+
+    getByClass(cls) {
+        return $('.' + cls);
+    }
+
+    makeNewDiv() {
+        return $('<div>');
+    }
+
+    makeNewButton() {
+        return $('<button>');
+    }
+
+}
+
+
+export {importJqueryIfAbsent, DOMHandler};

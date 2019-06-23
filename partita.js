@@ -131,14 +131,6 @@ function responsiveSize() {
 }
 
 
-function showNewLayer(newLayerId) {
-    let newLayer = $('#' + newLayerId);
-    let oldLayer = $('.renderedLayer');
-    oldLayer.removeClass('renderedLayer');
-    newLayer.addClass('renderedLayer');
-}
-
-
 async function runPartita(anchorId) {
     // Ensure external dependencies are present. If not, load them before carrying on.
     await utils.importJqueryIfAbsent();
