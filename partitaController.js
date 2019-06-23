@@ -1,8 +1,16 @@
 class Controller {
-    constructor(view, model) {
-        this.view = view;
+    constructor(views, model) {
+        this.views = views;
         this.model = model;
-        console.log('controller imported');
+    }
+
+    renderWorkingView() {
+        this.views.renderWorkingView();
+    }
+
+    run() {
+        this.renderWorkingView();
+
     }
 }
 

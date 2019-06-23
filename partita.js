@@ -1,5 +1,7 @@
 import * as utils from './utils.js';
 import * as partitaController from './partitaController.js';
+import * as partitaViews from './partitaViews.js'
+
 
 const PHI = 1.61803398875;
 
@@ -137,159 +139,15 @@ function showNewLayer(newLayerId) {
 }
 
 
-function showScales() {
-    showNewLayer('p-content-scales');
-}
-
-function showRepertoire() {
-    showNewLayer('p-content-repertoire');
-}
-
-function showFocusedPractice() {
-    showNewLayer('p-content-focused-practice');
-}
-
-
-class WorkingView {
-    constructor(anchorId) {
-        this.anchor = $('#' + anchorId);
-        this.renderTree();
-    }
-
-    renderTree() {
-        this.menu = this.renderMenu();
-        this.anchor.append(this.menu);
-
-        this.content = this.renderContent();
-        this.anchor.append(this.content);
-    }
-
-    renderMenu() {
-        let menu = $('<div>');
-        menu.attr('id', 'p-menu');
-        let buttons = [
-            this.scalesButton,
-            this.repertoireButton,
-            this.focusedPracticeButton,
-        ] = this.renderMenuButtons();
-        menu.append(buttons);
-
-        this.scalesButton.click(showScales);
-        this.repertoireButton.click(showRepertoire);
-        this.focusedPracticeButton.click(showFocusedPractice);
-        return menu;
-    }
-
-    renderMenuButtons() {
-        let scalesButton = $('<button>');
-        scalesButton.attr('id', 'p-menuScalesButton');
-        scalesButton.text('Scales');
-
-        let repertoireButton = $('<button>');
-        repertoireButton.attr('id', 'p-menuRepertoireButton');
-        repertoireButton.text('Repertoire');
-
-        let focusedPracticeButton = $('<button>');
-        focusedPracticeButton.attr('id', 'p-menuFocusedPracticeButton');
-        focusedPracticeButton.text('Focused Practice');
-
-        let buttons = [scalesButton, repertoireButton, focusedPracticeButton];
-        const buttonWidth = String(100 / buttons.length) + '%';
-
-        for (let button of buttons) {
-            button.width(buttonWidth);
-            button.height('100%');
-        }
-        return buttons;
-
-    }
-
-    renderContent() {
-        var content = $('<div>');
-        content.attr('id', 'p-content');
-
-        this.contentLeft = this.renderContentLeft();
-        content.append(this.contentLeft);
-
-        this.contentRight = this.renderContentRight();
-        content.append(this.contentRight);
-        return content;
-    }
-
-    renderContentLeft() {
-        let contentLeft = $('<span>');
-        contentLeft.attr('id', 'p-content-left');
-
-        this.contentScales = this.renderScales();
-        contentLeft.append(this.contentScales);
-
-        this.contentRepertoire = this.renderRepertoire();
-        contentLeft.append(this.contentRepertoire);
-
-        this.contentFocusedPractice = this.renderFocusedPractice();
-        contentLeft.append(this.contentFocusedPractice);
-
-        return contentLeft;
-    }
-
-    renderScales() {
-        let contentScales = $('<div>');
-        contentScales.attr('id', 'p-content-scales');
-        contentScales.addClass('renderedLayer');
-        let scalesText = $('<p>SCALES!</p>');
-        contentScales.append(scalesText);
-        return contentScales;
-    }
-
-    renderRepertoire() {
-        let contentRepertoire = $('<div>');
-        contentRepertoire.attr('id', 'p-content-repertoire');
-        let repertoireText = $('<p>REPERTOIRE!</p>');
-        contentRepertoire.append(repertoireText);
-        return contentRepertoire;
-    }
-
-    renderFocusedPractice() {
-        let contentFocusedPractice = $('<div>');
-        contentFocusedPractice.attr('id', 'p-content-focused-practice');
-        let FocusedPracticeText = $('<p>FOCUSED PRACTICE!</p>');
-        contentFocusedPractice.append(FocusedPracticeText);
-        return contentFocusedPractice;
-    }
-
-    renderContentRight() {
-        var contentRight = $('<span>');
-        contentRight.attr('id', 'p-content-right');
-
-        this.tuner = this.renderTuner();
-        contentRight.append(this.tuner);
-
-        this.metronome = this.renderMetronome();
-        contentRight.append(this.metronome);
-
-        return contentRight;
-    }
-
-    renderTuner() {
-        var tuner = $('<div>');
-        tuner.attr('id', 'p-content-tuner');
-        return tuner;
-    }
-
-    renderMetronome() {
-        var metronome = $('<div>');
-        metronome.attr('id', 'p-content-metronome');
-        return metronome
-    }
-}
-
-
 async function runPartita(anchorId) {
     // Ensure external dependencies are present. If not, load them before carrying on.
     await utils.importJqueryIfAbsent();
 
-    var workingView = new WorkingView(anchorId);
-    var controller = new partitaController.Controller(workingView, null);
+    var views = new partitaViews.Views(anchorId);
+    var controller = new partitaController.Controller(views, null);
+
+    controller.run();
+
     $(window).resize(responsiveSize);
     $(document).ready(responsiveSize);
 
