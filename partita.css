@@ -41,7 +41,7 @@
 }
 
 #p-menu button:focus {
-  background-color: #847E89;
+  background-color: #847E89 !important;
   outline: none;
 }
 

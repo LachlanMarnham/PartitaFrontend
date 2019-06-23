@@ -58,21 +58,21 @@ class WorkingView {
         const numberOfButtons = 3;
         const buttonWidth = String(100 / numberOfButtons) + '%';
 
-        let scalesButton = this.domHandler.makeMenuButton(
+        let scalesButton = this.domHandler.makeCustomButton(
             'p-menuScalesButton',
             'Scales',
             buttonWidth,
             '100%',
         );
 
-        let repertoireButton = this.domHandler.makeMenuButton(
+        let repertoireButton = this.domHandler.makeCustomButton(
             'p-menuRepertoireButton',
             'Repertoire',
             buttonWidth,
             '100%',
         );
 
-        let focusedPracticeButton = this.domHandler.makeMenuButton(
+        let focusedPracticeButton = this.domHandler.makeCustomButton(
             'p-menuFocusedPracticeButton',
             'Focused Practice!',
             buttonWidth,
