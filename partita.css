@@ -2,6 +2,12 @@
   --global-border-style: 1px solid #42373a;
 }
 
+#partita {
+    width: 100%;
+    max-width: 1000px;
+    background-color: black;
+}
+
 #p-menu {
   width: 100%;
   max-width: 1000px;

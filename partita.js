@@ -41,11 +41,19 @@ const BOTTOM_LEFT_CORNER_CSS_ATTRIBUTES = [
 ];
 
 
+function responsiveWrapper() {
+    let partitaWrapper = $('#partita');
+    let width = partitaWrapper.width();
+    partitaWrapper.height(width / PHI);
+}
+
 function responsiveContent() {
     // set content height
     let contentWindow = $('#p-content');
+    let wrapperHeight = $('#partita').height();
+
     let width = contentWindow.width();
-    contentWindow.height(width / PHI);
+    contentWindow.height(wrapperHeight * 0.9);
 
     // set content corner radii
     let cornerRadius = width * CORNER_RADIUS_WIDTH_RATIO;
@@ -76,9 +84,8 @@ function responsiveContent() {
 function responsiveMenu() {
     // set menu height
     let menu = $('#p-menu');
-    let contentHeight = $('#p-content').height();
-    let menuHeight = contentHeight / 9;
-    menu.height(menuHeight);
+    let wrapperHeight = $('#partita').height();
+    menu.height(wrapperHeight * 0.1);
 
     // set menu corner radii
     let menuWidth = menu.width();
@@ -102,6 +109,7 @@ function responsiveMenu() {
 
 
 function responsiveSize() {
+    responsiveWrapper();
     responsiveContent();
     responsiveMenu();
 }
