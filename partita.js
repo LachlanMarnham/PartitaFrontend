@@ -1,4 +1,5 @@
 import * as utils from './utils.js';
+import * as partitaController from './partitaController.js';
 
 const PHI = 1.61803398875;
 
@@ -288,9 +289,11 @@ async function runPartita(anchorId) {
     await utils.importJqueryIfAbsent();
 
     var workingView = new WorkingView(anchorId);
+    var controller = new partitaController.Controller(workingView, null);
     $(window).resize(responsiveSize);
     $(document).ready(responsiveSize);
 
 }
+
 
 runPartita('partita');
