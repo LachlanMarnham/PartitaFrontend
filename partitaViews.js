@@ -123,11 +123,17 @@ class WorkingView {
         this.selectedButton = newSelectedButton;
     }
 
-    showScales = () => this.showNewLayer('p-content-scales', this.scalesButton);
+    showScales = () => {
+        this.showNewLayer('p-content-scales', this.scalesButton);
+    }
 
-    showRepertoire = () => this.showNewLayer('p-content-repertoire', this.repertoireButton);
+    showRepertoire = () => {
+        this.showNewLayer('p-content-repertoire', this.repertoireButton);
+    }
 
-    showFocusedPractice = () => this.showNewLayer('p-content-focused-practice', this.focusedPracticeButton);
+    showFocusedPractice = () => {
+        this.showNewLayer('p-content-focused-practice', this.focusedPracticeButton);
+    }
 
     renderContentRight() {
         var contentRight = this.domHandler.makeNewSpan();
