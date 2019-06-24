@@ -61,7 +61,7 @@ class WorkingView {
     }
 
     renderContent() {
-        var content = $('<div>');
+        var content = this.domHandler.makeNewDiv();
         content.attr('id', 'p-content');
 
         this.contentLeft = this.renderContentLeft();
@@ -73,7 +73,7 @@ class WorkingView {
     }
 
     renderContentLeft() {
-        let contentLeft = $('<span>');
+        let contentLeft = this.domHandler.makeNewSpan();
         contentLeft.attr('id', 'p-content-left');
 
         this.contentScales = this.renderScales();
@@ -89,7 +89,7 @@ class WorkingView {
     }
 
     renderScales() {
-        let contentScales = $('<div>');
+        let contentScales = this.domHandler.makeNewDiv();
         contentScales.attr('id', 'p-content-scales');
         contentScales.addClass('renderedLayer');
         let scalesText = $('<p>SCALES!</p>');
@@ -98,7 +98,7 @@ class WorkingView {
     }
 
     renderRepertoire() {
-        let contentRepertoire = $('<div>');
+        let contentRepertoire = this.domHandler.makeNewDiv();
         contentRepertoire.attr('id', 'p-content-repertoire');
         let repertoireText = $('<p>REPERTOIRE!</p>');
         contentRepertoire.append(repertoireText);
@@ -106,7 +106,7 @@ class WorkingView {
     }
 
     renderFocusedPractice() {
-        let contentFocusedPractice = $('<div>');
+        let contentFocusedPractice = this.domHandler.makeNewDiv();
         contentFocusedPractice.attr('id', 'p-content-focused-practice');
         let FocusedPracticeText = $('<p>FOCUSED PRACTICE!</p>');
         contentFocusedPractice.append(FocusedPracticeText);
@@ -130,7 +130,7 @@ class WorkingView {
     showFocusedPractice = () => this.showNewLayer('p-content-focused-practice', this.focusedPracticeButton);
 
     renderContentRight() {
-        var contentRight = $('<span>');
+        var contentRight = this.domHandler.makeNewSpan();
         contentRight.attr('id', 'p-content-right');
 
         this.tuner = this.renderTuner();
@@ -143,13 +143,13 @@ class WorkingView {
     }
 
     renderTuner() {
-        var tuner = $('<div>');
+        var tuner = this.domHandler.makeNewDiv();
         tuner.attr('id', 'p-content-tuner');
         return tuner;
     }
 
     renderMetronome() {
-        var metronome = $('<div>');
+        var metronome = this.domHandler.makeNewDiv();
         metronome.attr('id', 'p-content-metronome');
         return metronome
     }
@@ -160,7 +160,7 @@ class Views {
     constructor(anchorId) {
         this.currentView = null;
         this.domHandler = new DOMHandler();
-        this.anchor = this.domHandler.getById(anchorId); //$('#' + anchorId);
+        this.anchor = this.domHandler.getById(anchorId);
         this.workingView = new WorkingView(this.anchor, this.domHandler);
     }
 

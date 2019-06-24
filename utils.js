@@ -41,6 +41,10 @@ class DOMHandler {
         return $('<div>');
     }
 
+    makeNewSpan() {
+        return $('<span>');
+    }
+
     makeNewButton() {
         return $('<button>');
     }
