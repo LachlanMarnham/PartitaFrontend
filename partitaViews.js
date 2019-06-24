@@ -40,6 +40,8 @@ class WorkingView {
             'btn-selected',
         );
 
+        this.selectedButton = scalesButton;
+
         let repertoireButton = this.domHandler.makeCustomButton(
             'p-menuRepertoireButton',
             'Repertoire',
@@ -110,6 +112,22 @@ class WorkingView {
         contentFocusedPractice.append(FocusedPracticeText);
         return contentFocusedPractice;
     }
+
+    showNewLayer = (newLayerId, newSelectedButton) => {
+        let newLayer = $('#' + newLayerId);
+        let oldLayer = $('.renderedLayer');
+        oldLayer.removeClass('renderedLayer');
+        newLayer.addClass('renderedLayer');
+        this.selectedButton.removeClass('btn-selected');
+        newSelectedButton.addClass('btn-selected');
+        this.selectedButton = newSelectedButton;
+    }
+
+    showScales = () => this.showNewLayer('p-content-scales', this.scalesButton);
+
+    showRepertoire = () => this.showNewLayer('p-content-repertoire', this.repertoireButton);
+
+    showFocusedPractice = () => this.showNewLayer('p-content-focused-practice', this.focusedPracticeButton);
 
     renderContentRight() {
         var contentRight = $('<span>');

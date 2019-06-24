@@ -40,7 +40,7 @@
   background-color: #665c5f;
 }
 
-#p-menu button:focus {
+#p-menu button.btn-selected {
   background-color: #847E89 !important;
   outline: none;
 }

@@ -1,25 +1,3 @@
-function showNewLayer(newLayerId) {
-    let newLayer = $('#' + newLayerId);
-    let oldLayer = $('.renderedLayer');
-    oldLayer.removeClass('renderedLayer');
-    newLayer.addClass('renderedLayer');
-}
-
-
-function showScales() {
-    showNewLayer('p-content-scales');
-}
-
-
-function showRepertoire() {
-    showNewLayer('p-content-repertoire');
-}
-
-
-function showFocusedPractice() {
-    showNewLayer('p-content-focused-practice');
-}
-
 class Controller {
     constructor(views, model) {
         this.views = views;
@@ -29,15 +7,13 @@ class Controller {
     renderWorkingView() {
         this.views.renderWorkingView();
 
-        this.views.workingView.scalesButton.click(showScales);
-        this.views.workingView.repertoireButton.click(showRepertoire);
-        this.views.workingView.focusedPracticeButton.click(showFocusedPractice);
-
+        this.views.workingView.scalesButton.click(this.views.workingView.showScales);
+        this.views.workingView.repertoireButton.click(this.views.workingView.showRepertoire);
+        this.views.workingView.focusedPracticeButton.click(this.views.workingView.showFocusedPractice);
     }
 
     run() {
         this.renderWorkingView();
-
     }
 }
 
