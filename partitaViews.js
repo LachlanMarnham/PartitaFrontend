@@ -92,6 +92,7 @@ class WorkingView {
         let contentScales = this.domHandler.makeNewDiv();
         contentScales.attr('id', 'p-content-scales');
         contentScales.addClass('renderedLayer');
+        this.renderedLayer = contentScales;
         let scalesText = $('<p>SCALES!</p>');
         contentScales.append(scalesText);
         return contentScales;
@@ -114,10 +115,14 @@ class WorkingView {
     }
 
     showNewLayer = (newLayerId, newSelectedButton) => {
-        let newLayer = $('#' + newLayerId);
-        let oldLayer = $('.renderedLayer');
-        oldLayer.removeClass('renderedLayer');
+        let newLayer = this.domHandler.getById(newLayerId);
+
+        // Bring the selected layer to the top of the stack
+        this.renderedLayer.removeClass('renderedLayer');
         newLayer.addClass('renderedLayer');
+        this.renderedLayer = newLayer;
+
+        // Mark the button corresponding to the selected layer as selected
         this.selectedButton.removeClass('btn-selected');
         newSelectedButton.addClass('btn-selected');
         this.selectedButton = newSelectedButton;
