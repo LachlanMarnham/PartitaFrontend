@@ -1,29 +1,6 @@
 import {DOMHandler} from './utils.js'
 
 
-function showNewLayer(newLayerId) {
-    let newLayer = $('#' + newLayerId);
-    let oldLayer = $('.renderedLayer');
-    oldLayer.removeClass('renderedLayer');
-    newLayer.addClass('renderedLayer');
-}
-
-
-function showScales() {
-    showNewLayer('p-content-scales');
-}
-
-
-function showRepertoire() {
-    showNewLayer('p-content-repertoire');
-}
-
-
-function showFocusedPractice() {
-    showNewLayer('p-content-focused-practice');
-}
-
-
 class WorkingView {
     constructor(anchor, domHandler) {
         this.anchor = anchor;
@@ -48,9 +25,6 @@ class WorkingView {
         ] = this.renderMenuButtons();
         menu.append(buttons);
 
-        this.scalesButton.click(showScales);
-        this.repertoireButton.click(showRepertoire);
-        this.focusedPracticeButton.click(showFocusedPractice);
         return menu;
     }
 
@@ -63,6 +37,7 @@ class WorkingView {
             'Scales',
             buttonWidth,
             '100%',
+            'btn-selected',
         );
 
         let repertoireButton = this.domHandler.makeCustomButton(
