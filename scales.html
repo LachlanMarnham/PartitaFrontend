@@ -1,6 +1,7 @@
 <html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
 
@@ -18,17 +19,30 @@
             </div>
             <div class="p-form-element-wrapper p-tempo-wrapper">
                 <label for="tempos" class="p-form-element-label"><b>Tempos:</b></label>
-                <ol id="tempos">
-                    <li>
-                        <input type="text" class="p-tempo" value="1st January 2019 at 1.30pm" required>
-                    </li>
-                    <li>
-                        <input type="text" class="p-tempo" value="1st January 2019 at 1.30pm" required>
-                    </li>
-                    <li>
-                        <input type="text" class="p-tempo" value="1st January 2019 at 1.30pm" required>
-                    </li>
-                </ol>
+                <button class="p-icon"><i class="fa fa-plus"></i></button>
+                <div class="p-scrollable-wrapper">
+                    <ol id="tempos">
+                        <li>
+                            <input type="text" class="p-tempo" value="150 bpm" required>
+                            <button class="p-icon"><i class="fa fa-play"></i></button>
+                            <button class="p-icon"><i class="fa fa-trash"></i></button>
+                        </li>
+                        <li>
+                            <input type="text" class="p-tempo" value="22 bpm" required>
+                            <button class="p-icon"><i class="fa fa-play"></i></button>
+                            <button class="p-icon"><i class="fa fa-trash"></i></button>
+                        </li>
+                        <li>
+                            <input type="text" class="p-tempo" value="200 bpm" required>
+                            <button class="p-icon"><i class="fa fa-play"></i></button>
+                            <button class="p-icon"><i class="fa fa-trash"></i></button>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="p-navigation-wrapper">
+                <button class="p-icon">Next</button>
+                <button class="p-icon">Add</button>
             </div>
         </form>
 
@@ -71,12 +85,17 @@
         }
 
         .p-tempo-wrapper {
-            height: 60%;
+            height: 50%;
+        }
+
+        .p-scrollable-wrapper {
+            height: 80%;
             overflow-x: hidden;
             overflow-y: scroll;
         }
 
         .p-tempo {
+            width: 70% !important;
             height: 20% !important;
         }
 
@@ -89,6 +108,27 @@
             border-radius: 4px;
             background-color: rgba(0,0,0,.5);
             -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+        }
+
+        .p-icon {
+          background-color: #606965; /* Blue background */
+          border: none; /* Remove borders */
+          color: white; /* White text */
+          padding: 12px 16px; /* Some padding */
+          font-size: 16px; /* Set a font size */
+          cursor: pointer; /* Mouse pointer on hover */
+        }
+
+        /* Darker background on mouse-over */
+        .p-icon:hover {
+          background-color: #5b5457;
+        }
+
+        .p-navigation-wrapper {
+
+            text-align: center;
+            width: 90%;
+            padding-left: 5%;
         }
 
     </style>
