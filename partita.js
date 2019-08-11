@@ -1,6 +1,7 @@
 import * as utils from './utils.js';
 import * as partitaController from './partitaController.js';
-import * as partitaViews from './partitaViews.js'
+import * as partitaViews from './partitaViews.js';
+import * as partitaModels from './partitaModels.js';
 
 
 const PHI = 1.61803398875;
@@ -137,7 +138,8 @@ async function runPartita(anchorId) {
 
     var views = new partitaViews.Views(anchorId);
     var controller = new partitaController.Controller(views, null);
-
+    var models = new partitaModels.Models('{"scales": [{"title": "A minor", "tempos": [50, 100, 150, 200, 250], "last_played": "21st August"}]}');
+    console.log(models.scalesModel[0]);
     controller.run();
 
     $(window).resize(responsiveSize);
