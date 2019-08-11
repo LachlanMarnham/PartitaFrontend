@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+    <div id="p-content-scales">
+        <form>
+            <div class="p-form-element-wrapper">
+                <label for="p-scale-title" class="p-form-element-label"><b>Title:</b></label>
+                <input type="text" value="A minor" id="p-scale-title" required>
+            </div>
+            <div class="p-form-element-wrapper">
+                <label for="lastplayed" class="p-form-element-label"><b>Last Played:</b></label>
+                <input type="text" value="1st January 2019 at 1.30pm" id="lastplayed" readonly>
+            </div>
+            <div class="p-form-element-wrapper p-tempo-wrapper">
+                <label for="tempos" class="p-form-element-label"><b>Tempos:</b></label>
+                <button class="p-icon"><i class="fa fa-plus"></i></button>
+                <div class="p-scrollable-wrapper">
+                    <ol id="tempos">
+                        <li>
+                            <input type="text" class="p-tempo" value="150 bpm" required>
+                            <button class="p-icon"><i class="fa fa-play"></i></button>
+                            <button class="p-icon"><i class="fa fa-trash"></i></button>
+                        </li>
+                        <li>
+                            <input type="text" class="p-tempo" value="22 bpm" required>
+                            <button class="p-icon"><i class="fa fa-play"></i></button>
+                            <button class="p-icon"><i class="fa fa-trash"></i></button>
+                        </li>
+                        <li>
+                            <input type="text" class="p-tempo" value="200 bpm" required>
+                            <button class="p-icon"><i class="fa fa-play"></i></button>
+                            <button class="p-icon"><i class="fa fa-trash"></i></button>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="p-navigation-wrapper">
+                <button class="p-icon">Next</button>
+                <button class="p-icon">Add</button>
+            </div>
+        </form>
+
+    </div>
+
+    <style>
+        .p-form-element-label {
+            height:50%;
+            font-size: large;
+        }
+
+        #p-content-scales {
+            font-family: 'Nunito', sans-serif;
+            width: 498;
+            height: 556;
+            background-color: rgb(194, 211, 205);
+        }
+
+        .p-form-element-wrapper {
+            width: 90%;
+            height: 20%;
+            padding-left: 5%;
+        }
+
+        input[type=text] {
+          width: 100%;
+          height: 50%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          background-color: transparent;
+          font-size: large;
+        }
+
+        input[type=text]:focus {
+          background-color: #D3C2C8;
+          outline: none;
+        }
+
+        .p-tempo-wrapper {
+            height: 50%;
+        }
+
+        .p-scrollable-wrapper {
+            height: 80%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .p-tempo {
+            width: 70% !important;
+            height: 20% !important;
+        }
+
+        ::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 7px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(0,0,0,.5);
+            -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+        }
+
+        .p-icon {
+          background-color: #606965; /* Blue background */
+          border: none; /* Remove borders */
+          color: white; /* White text */
+          padding: 12px 16px; /* Some padding */
+          font-size: 16px; /* Set a font size */
+          cursor: pointer; /* Mouse pointer on hover */
+        }
+
+        /* Darker background on mouse-over */
+        .p-icon:hover {
+          background-color: #5b5457;
+        }
+
+        .p-navigation-wrapper {
+
+            text-align: center;
+            width: 90%;
+            padding-left: 5%;
+        }
+
+    </style>
+
+    </body>
+
+</html>
