@@ -1,10 +1,26 @@
 import {DOMHandler} from './utils.js'
 
 
+class ScalesView {
+    constructor() {}
+
+    render(containerDiv) {
+        containerDiv.attr('id', 'p-content-scales');
+        containerDiv.addClass('renderedLayer');
+        let scalesText = $('<p>SCALES!</p>');
+        containerDiv.append(scalesText);
+    }
+
+    showNextScale() {}
+
+}
+
+
 class WorkingView {
     constructor(anchor, domHandler) {
         this.anchor = anchor;
         this.domHandler = domHandler;
+        this.scales = new ScalesView();
     }
 
     render() {
@@ -90,11 +106,8 @@ class WorkingView {
 
     renderScales() {
         let contentScales = this.domHandler.makeNewDiv();
-        contentScales.attr('id', 'p-content-scales');
-        contentScales.addClass('renderedLayer');
         this.renderedLayer = contentScales;
-        let scalesText = $('<p>SCALES!</p>');
-        contentScales.append(scalesText);
+        this.scales.render(contentScales);
         return contentScales;
     }
 
