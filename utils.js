@@ -49,6 +49,28 @@ class DOMHandler {
         return $('<button>');
     }
 
+    makeNewForm() {
+        return $('<form>');
+    }
+
+    makeNewLabel(forId) {
+        let label = $('<label>');
+        label.attr('for', forId);
+        return label;
+    }
+
+    makeNewBold(text) {
+        let bold = $('<b>');
+        bold.text(text);
+        return bold;
+    }
+
+    makeNewInput(inputType) {
+        let input = $('<input>');
+        input.attr('type', inputType);
+        return input;
+    }
+
     makeCustomButton(id, text, width, height, cls='') {
         let newButton = this.makeNewButton();
         newButton.attr('id', id);

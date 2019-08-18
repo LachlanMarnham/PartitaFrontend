@@ -2,13 +2,34 @@ import {DOMHandler} from './utils.js'
 
 
 class ScalesView {
-    constructor() {}
+    constructor(domHandler) {
+        this.domHandler = domHandler;
+    }
 
-    render(containerDiv) {
-        containerDiv.attr('id', 'p-content-scales');
-        containerDiv.addClass('renderedLayer');
+    render(domHandler) {
+        let contentScales = this.domHandler.makeNewDiv();
+        contentScales.attr('id', 'p-content-scales');
+        let innerForm = this.domHandler.makeNewForm();
+        let titleElement = this.renderTitle();
+        innerForm.append(titleElement);
+        contentScales.append(innerForm);
         let scalesText = $('<p>SCALES!</p>');
-        containerDiv.append(scalesText);
+        contentScales.append(scalesText);
+        return contentScales;
+    }
+
+    renderTitle() {
+        let wrapper = this.domHandler.makeNewDiv();
+        wrapper.addClass("p-form-element-wrapper");
+        let label = this.domHandler.makeNewLabel("p-scale-title");
+        let labelText = this.domHandler.makeNewBold("Title:");
+        label.append(labelText);
+        label.addClass("p-form-element-label");
+        let input = this.domHandler.makeNewInput("text");
+        input.attr('id', 'p-scale-title');
+        wrapper.append(label);
+        wrapper.append(input);
+        return wrapper;
     }
 
     showNextScale() {}
@@ -20,7 +41,7 @@ class WorkingView {
     constructor(anchor, domHandler) {
         this.anchor = anchor;
         this.domHandler = domHandler;
-        this.scales = new ScalesView();
+        this.scales = new ScalesView(this.domHandler);
     }
 
     render() {
@@ -105,9 +126,9 @@ class WorkingView {
     }
 
     renderScales() {
-        let contentScales = this.domHandler.makeNewDiv();
+        let contentScales = this.scales.render(this.domHandler);
+        contentScales.addClass('renderedLayer');
         this.renderedLayer = contentScales;
-        this.scales.render(contentScales);
         return contentScales;
     }
 
