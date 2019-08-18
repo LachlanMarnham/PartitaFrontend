@@ -51,7 +51,7 @@ class WorkingView {
 
         let focusedPracticeButton = this.domHandler.makeCustomButton(
             'p-menuFocusedPracticeButton',
-            'Focused Practice!',
+            'Focused Practice',
             buttonWidth,
             '100%',
         );
