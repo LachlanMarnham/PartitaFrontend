@@ -137,10 +137,11 @@ async function runPartita(anchorId) {
     await utils.importJqueryIfAbsent();
 
     var views = new partitaViews.Views(anchorId);
-    var controller = new partitaController.Controller(views, null);
-    var models = new partitaModels.Models('{"scales": [{"title": "A minor", "tempos": [50, 100, 150, 200, 250], "last_played": "21st August"}]}');
-    console.log(models.scalesModel[0]);
+    var model = new partitaModels.Models();
+    var controller = new partitaController.Controller(views, model);
+
     controller.run();
+    console.log(controller.model.scalesModel[0]);
 
     $(window).resize(responsiveSize);
     $(document).ready(responsiveSize);

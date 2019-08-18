@@ -2,6 +2,7 @@ class Controller {
     constructor(views, model) {
         this.views = views;
         this.model = model;
+        this.model.populate();
     }
 
     renderWorkingView() {

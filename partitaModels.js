@@ -66,9 +66,18 @@ class ScaleCollection extends Array {
 
 
 class Models {
-    constructor(jsonData) {
+    constructor() {
+        this.scalesModel = null;
+    }
+
+    populate() {
+        let jsonData = this.getPopulateData();
         let objData = JSON.parse(jsonData);
         this.scalesModel = new ScaleCollection(objData.scales);
+    }
+
+    getPopulateData() {
+        return '{"scales": [{"title": "A minor", "tempos": [50, 100, 150, 200, 250], "last_played": "21st July"}]}';
     }
 }
 
