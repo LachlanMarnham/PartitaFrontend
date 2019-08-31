@@ -12,9 +12,9 @@ class ScalesView {
         let innerForm = this.domHandler.makeNewForm();
         let titleElement = this.renderTitle();
         innerForm.append(titleElement);
+        let lastPlayedElement = this.renderLastPlayed();
+        innerForm.append(lastPlayedElement);
         contentScales.append(innerForm);
-        let scalesText = $('<p>SCALES!</p>');
-        contentScales.append(scalesText);
         return contentScales;
     }
 
@@ -31,6 +31,22 @@ class ScalesView {
         wrapper.append(input);
         return wrapper;
     }
+
+    renderLastPlayed() {
+        let wrapper = this.domHandler.makeNewDiv();
+        wrapper.addClass("p-form-element-wrapper");
+        let label = this.domHandler.makeNewLabel("lastplayed");
+        let labelText = this.domHandler.makeNewBold("Last Played:");
+        label.append(labelText);
+        label.addClass("p-form-element-label");
+        let input = this.domHandler.makeNewInput("text");
+        input.attr('id', 'lastplayed');
+        wrapper.append(label);
+        wrapper.append(input);
+        return wrapper;
+    }
+
+    renderTempos() {}
 
     showNextScale() {}
 
